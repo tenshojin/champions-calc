@@ -1,0 +1,17 @@
+{
+  "name": "冠军伤害计算器",
+  "short_name": "冠军伤害计算",
+  "description": "宝可梦冠军 M-C 规则伤害计算器（单打/双打，中文・日本語・English）",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#E7EBF2",
+  "theme_color": "#E7EBF2",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
