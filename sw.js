@@ -1,6 +1,6 @@
 // Offline support: the page is fetched fresh when online (so updates show up right away)
 // and served from the cache when offline. Icons and web fonts are cached on first use.
-const CACHE = 'champcalc-v1';
+const CACHE = 'champcalc-v2';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png'];
 
 self.addEventListener('install', event => {
@@ -19,7 +19,9 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  const isPage = req.mode === 'navigate' || (url.origin === location.origin && /\/(index\.html)?$/.test(url.pathname));
+  // leave the APK download and the download page to the network
+  if (url.origin === location.origin && /\/download\//.test(url.pathname)) return;
+  const isPage = url.origin === location.origin && /\/(index\.html)?$/.test(url.pathname);
   if (isPage) {
     event.respondWith(
       fetch(req)

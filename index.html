@@ -292,6 +292,7 @@ body[data-dir="0"] .dirblock[data-d="1"], body[data-dir="1"] .dirblock[data-d="0
 
 footer.src{margin-top:18px;font-size:11.5px;color:var(--muted);line-height:1.7}
 footer.src a{color:var(--muted)}
+footer.src a.dlpill{display:inline-block;margin-bottom:8px;padding:6px 14px;border-radius:999px;background:var(--gold);color:#2a1c00;font-size:13px;font-weight:700;text-decoration:none}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
@@ -396,6 +397,7 @@ const T = {
     moveTitle: k => `选择招式（第 ${k} 格）`, clearSlot: '清空这一格', learnable: n => `可学会的招式（${n}）`, otherMoves: '其他招式（这只宝可梦学不会）', noMove: '没有找到这个招式。',
     natTitle: '选择性格', commonNat: m => `${m}常用性格 · 采用率`, allNat: '全部性格',
     natHint: '行是提升 10% 的能力，列是降低 10% 的能力；对角线上的性格没有修正。',
+    androidDl: '安卓版 App 下载（APK）',
     built: (d, n, m) => `数据整理于 ${d} · 共 ${n} 只宝可梦（另含 ${m} 种超级进化形态）`,
     footer: '伤害公式：<a href="https://github.com/smogon/damage-calc" target="_blank" rel="noopener">Smogon Damage Calculator</a>（已按宝可梦冠军规则计算）· 可用宝可梦与招式：<a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noopener">Pokémon Showdown</a> 的 M-C 数据 · 双打常用配置与概率：<a href="https://www.pikalytics.com/pokedex/gen9championsvgc2026regmc" target="_blank" rel="noopener">Pikalytics</a> M-C 双打统计（使用率前 50）· 单打常用配置与概率：<a href="https://gamewith.ai/pokemon-champions/zh-hans/usage-ranking" target="_blank" rel="noopener">GameWith</a> 单打对战数据（使用率前 50，含性格与能力点分配）· 推荐性格与能力点：Smogon 分析 · 名称：<a href="https://github.com/PokeAPI/pokeapi" target="_blank" rel="noopener">PokeAPI</a><br>双打的百分比来自 Pikalytics 收集的对战，并非游戏内官方数据；单打的数据赛季标在每只宝可梦旁边，个别宝可梦的数据较旧。没有统计的宝可梦按种族值自动填入配置。',
   },
@@ -441,6 +443,7 @@ const T = {
     moveTitle: k => `わざを選ぶ（${k}つ目）`, clearSlot: 'このわざを外す', learnable: n => `覚えるわざ（${n}）`, otherMoves: 'その他のわざ（覚えません）', noMove: 'わざが見つかりません。',
     natTitle: '性格を選ぶ', commonNat: m => `${m}の性格採用率`, allNat: 'すべての性格',
     natHint: '行の能力が1.1倍、列の能力が0.9倍になります。対角線上の性格は補正なしです。',
+    androidDl: 'Android版アプリをダウンロード（APK）',
     built: (d, n, m) => `データ更新 ${d} · ポケモン${n}匹（ほかにメガシンカ${m}種）`,
     footer: 'ダメージ計算式：<a href="https://github.com/smogon/damage-calc" target="_blank" rel="noopener">Smogon Damage Calculator</a>（ポケモンチャンピオンズのルールで計算）· 使えるポケモンとわざ：<a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noopener">Pokémon Showdown</a> の M-C データ · ダブルの採用型と採用率：<a href="https://www.pikalytics.com/pokedex/gen9championsvgc2026regmc" target="_blank" rel="noopener">Pikalytics</a> の M-C ダブル統計（使用率上位50）· シングルの採用型と採用率：<a href="https://gamewith.ai/pokemon-champions/zh-hans/usage-ranking" target="_blank" rel="noopener">GameWith</a> のシングル対戦データ（使用率上位50、性格と能力ポイント配分を含む）· おすすめの性格と能力ポイント：Smogon の分析 · 名前：<a href="https://github.com/PokeAPI/pokeapi" target="_blank" rel="noopener">PokeAPI</a><br>ダブルの数値は Pikalytics が集めた対戦によるもので、ゲーム内の公式データではありません。シングルのデータのシーズンは各ポケモンの横に表示しています（一部は古いデータです）。データのないポケモンは種族値から型を自動で入れています。',
   },
@@ -487,6 +490,7 @@ const T = {
     moveTitle: k => `Choose move (slot ${k})`, clearSlot: 'Clear this slot', learnable: n => `Learnable moves (${n})`, otherMoves: "Other moves (can't learn)", noMove: 'No move matches that.',
     natTitle: 'Choose nature', commonNat: m => `Common natures in ${m}`, allNat: 'All natures',
     natHint: 'Rows raise a stat by 10%, columns lower one by 10%. Natures on the diagonal are neutral.',
+    androidDl: 'Download the Android app (APK)',
     built: (d, n, m) => `Data compiled ${d} · ${n} Pokémon (plus ${m} Mega forms)`,
     footer: 'Damage formula: <a href="https://github.com/smogon/damage-calc" target="_blank" rel="noopener">Smogon Damage Calculator</a> (using Pokémon Champions rules) · Legal Pokémon and moves: <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noopener">Pokémon Showdown</a> Reg M-C data · Doubles sets and usage: <a href="https://www.pikalytics.com/pokedex/gen9championsvgc2026regmc" target="_blank" rel="noopener">Pikalytics</a> Reg M-C doubles stats (top 50) · Singles sets and usage: <a href="https://gamewith.ai/pokemon-champions/zh-hans/usage-ranking" target="_blank" rel="noopener">GameWith</a> singles battle data (top 50, with natures and stat point spreads) · Suggested natures and spreads: Smogon analyses · Names: <a href="https://github.com/PokeAPI/pokeapi" target="_blank" rel="noopener">PokeAPI</a><br>Doubles percentages come from battles collected by Pikalytics, not official in-game data. The season of each singles dataset is shown next to the Pokémon; a few are older. Pokémon without usage data get a set built from their base stats.',
   },
@@ -805,7 +809,9 @@ function renderChrome() {
   for (const el of document.querySelectorAll('[data-i18n-aria]')) el.setAttribute('aria-label', t(el.dataset.i18nAria));
   for (const el of document.querySelectorAll('[data-i18n-ph]')) el.setAttribute('placeholder', t(el.dataset.i18nPh));
   for (const l of Object.keys(LANGS)) $('lang-' + l).setAttribute('aria-pressed', String(LANG === l));
-  $('footerText').innerHTML = t('footer');
+  // on the public website (not inside the Android app) offer the APK download page
+  const showDl = /github\.io$/.test(location.hostname) && !/; wv\)/.test(navigator.userAgent);
+  $('footerText').innerHTML = (showDl ? `<a class="dlpill" href="download/">${t('androidDl')}</a><br>` : '') + t('footer');
   $('buildInfo').textContent = t('built', D.meta.built, D.species.filter(s => !s.m).length, D.species.filter(s => s.m).length);
 }
 

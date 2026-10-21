@@ -9,4 +9,6 @@
 
 打开：https://tenshojin.github.io/champions-calc/
 
+安卓 App（APK）下载：https://tenshojin.github.io/champions-calc/download/
+
 非官方粉丝工具，与任天堂、宝可梦公司无关。伤害公式来自 Smogon Damage Calculator；数据来源见页面底部。
