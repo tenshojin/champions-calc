@@ -294,6 +294,83 @@ footer.src{margin-top:18px;font-size:11.5px;color:var(--muted);line-height:1.7}
 footer.src a{color:var(--muted)}
 footer.src a.dlpill{display:inline-block;margin-bottom:8px;padding:6px 14px;border-radius:999px;background:var(--gold);color:#2a1c00;font-size:13px;font-weight:700;text-decoration:none}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+/* page switch: damage calc | speed tiers */
+.views{display:flex;gap:6px;margin:0 0 8px}
+.views button{flex:1 1 0;max-width:240px;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:8px 12px;font-weight:700;font-size:14px;color:var(--muted)}
+.views button[aria-selected="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+body[data-view="speed"] .matchbar,body[data-view="speed"] main.grid,body[data-view="speed"] .swap{display:none}
+body:not([data-view="speed"]) #spdPage{display:none}
+
+/* speed tiers page */
+.spdwrap{display:flex;flex-direction:column;gap:14px}
+.spdctl{padding:14px}
+body[data-view="speed"] .views{position:sticky;top:env(safe-area-inset-top,0px);z-index:22;background:var(--bg);margin:0;padding:4px 0 8px}
+@media (min-width:1000px){ .spdwrap{display:grid;grid-template-columns:360px minmax(0,1fr);gap:16px;align-items:start} .spdctl{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--navh,0px));max-height:calc(100vh - var(--navh,0px) - 12px);overflow:auto} }
+.spdbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--navh,0px));z-index:5;background:var(--panel);margin:0 -12px;padding:12px 12px 8px;border-bottom:1px solid var(--line);border-radius:var(--r) var(--r) 0 0}
+.spdinputs{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:8px}
+.inp{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:0 6px 0 10px;min-height:42px;min-width:0;cursor:text}
+.inp:focus-within{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-soft)}
+.inp .pre{font-size:11.5px;font-weight:700;color:var(--muted);white-space:nowrap;flex:none}
+.inp input{flex:1;min-width:0;width:100%;border:0;background:none;font-size:16px;padding:8px 0;outline:none}
+.inp #spdCmp{font-family:var(--f-num);font-weight:700;font-size:19px}
+.inp .x{flex:none;border:0;background:var(--panel);border-radius:999px;width:28px;height:28px;font-size:15px;line-height:1}
+.spdquick{margin-top:8px}
+.spdquick .chip b{font-family:var(--f-num);font-size:14px}
+.spdcount{margin-top:6px;font-size:11.5px;color:var(--muted);font-weight:600}
+.spdctl .fgroup + .fgroup{margin-top:14px}
+.legend{font-size:11.5px;color:var(--muted);line-height:1.55;margin:0}
+.spdlist{padding:0 12px 10px}
+.tier{display:grid;grid-template-columns:48px minmax(0,1fr);gap:8px;padding:6px 4px;border-top:1px solid var(--line)}
+.tier .tv{border:0;background:none;padding:0;font-family:var(--f-num);font-weight:700;font-size:21px;line-height:30px;text-align:right;color:var(--ink)}
+.tier:first-child{border-top:0}
+.tier.tie{background:var(--gold-soft);border-radius:10px;border-top-color:transparent}
+.tents{display:flex;flex-wrap:wrap;gap:5px 6px;min-width:0}
+.se{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:2px 10px 2px 3px;max-width:100%;min-width:0}
+.se .sn{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.se .sn b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.se .sn small{font-size:11px;color:var(--muted);white-space:normal}
+.se .pct{font-size:11.5px;line-height:16px;flex:none}
+.mono.xs{width:26px;height:26px;font-size:12px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
+.mono.xs .mg{font-size:7.5px;line-height:11px;right:-4px;bottom:-3px;padding:0 2px;border-radius:4px}
+.cmpline{display:flex;align-items:center;gap:8px;color:var(--gold-ink);font-weight:700;font-size:12.5px;padding:8px 0;white-space:nowrap}
+.cmpline::before,.cmpline::after{content:"";flex:1;height:2px;background:var(--gold);border-radius:2px}
+.spdmore{display:block;margin:10px auto 4px}
+.speed .sv b{text-decoration:underline dotted var(--muted);text-underline-offset:3px}
+.speed .spdlink{border:0;background:none;color:var(--gold-ink);font-weight:600;font-size:12.5px;padding:0}
+
+/* nearby speed tiers under the Speed slider */
+.srow[data-spdrow]{cursor:pointer}
+.spdnear{margin:0 0 6px;scroll-margin-top:120px}
+.nearbar{display:block;margin-left:auto;border:0;background:none;color:var(--gold-ink);font-size:12px;font-weight:600;padding:0 0 2px}
+.nearbox{border:1px solid var(--gold);background:var(--panel2);border-radius:12px;padding:8px 10px}
+.nearbox .nh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.nearbox .nh b{font-size:13px}
+.nearbox .nbtn{display:flex;gap:6px;flex:none}
+.nearbox .info{border:1px solid var(--line);background:var(--panel);border-radius:999px;width:26px;height:26px;font-size:13px;font-weight:800;line-height:1;color:var(--muted);padding:0}
+.nearbox .x{border:0;background:var(--panel);border-radius:999px;width:26px;height:26px;font-size:15px;line-height:1;flex:none}
+.ncur{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;font-size:12px;color:var(--muted);margin:0 0 4px}
+.ncur b{font-family:var(--f-num);font-size:19px;color:var(--ink)}
+.nr{display:grid;grid-template-columns:auto minmax(0,1fr) auto 44px;gap:8px;align-items:center;padding:4px 0;border-top:1px solid var(--line)}
+.nr .nn{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.nr .nn b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nr .nn small{font-size:11px;color:var(--muted)}
+.nr .nv{font-family:var(--f-num);font-weight:700;font-size:17px;text-align:right}
+.nr .nd{font-family:var(--f-num);font-weight:700;font-size:13px;text-align:center;border-radius:6px;line-height:20px;white-space:nowrap}
+.nr.ahead .nd{color:var(--them);background:var(--them-soft)}
+.nr.behind .nd{color:var(--us);background:var(--us-soft)}
+.nr.same .nd{color:var(--gold-ink);background:var(--gold-soft)}
+.nearbox .cmpline{padding:5px 0}
+/* explanation bubble */
+[data-tip]{cursor:help;-webkit-tap-highlight-color:transparent}
+.nr small,.se small{text-decoration:underline dotted color-mix(in srgb,var(--muted) 55%,transparent);text-underline-offset:2px}
+.nr:focus-visible,.se:focus-visible,.ncur:focus-visible{outline:2px solid var(--gold);outline-offset:1px;border-radius:8px}
+.nr[aria-describedby],.se[aria-describedby]{background:var(--gold-soft)}
+.ncur[data-tip] b{text-decoration:underline dotted var(--muted);text-underline-offset:3px}
+.tip{position:fixed;z-index:60;max-width:min(320px,calc(100vw - 16px));background:var(--ink);color:var(--panel);font-size:12px;line-height:1.55;border-radius:10px;padding:8px 11px;box-shadow:0 6px 22px rgba(0,0,0,.28);white-space:pre-line;pointer-events:none}
+.nsub{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin:10px 0 2px}
+.nfoot{display:flex;justify-content:space-between;gap:8px;margin-top:6px}
+.nfoot .act{border:0;background:none;color:var(--gold-ink);font-size:12.5px;font-weight:600;padding:2px 0}
 </style>
 </head>
 <body>
@@ -309,6 +386,10 @@ footer.src a.dlpill{display:inline-block;margin-bottom:8px;padding:6px 14px;bord
     </div>
     <button class="swap" id="swapBtn" type="button" data-i18n-aria="swapAria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg><span data-i18n="swap"></span></button>
   </header>
+
+  <nav class="views" id="views" role="tablist" data-i18n-aria="viewAria">
+    <button type="button" role="tab" id="view-calc" data-act="view" data-v="calc" data-i18n="viewCalc"></button><button type="button" role="tab" id="view-speed" data-act="view" data-v="speed" data-i18n="viewSpeed"></button>
+  </nav>
 
   <div class="matchbar">
     <div class="mb" role="tablist">
@@ -328,6 +409,8 @@ footer.src a.dlpill{display:inline-block;margin-bottom:8px;padding:6px 14px;bord
     </div>
     <section class="panel card side them" id="panel1" data-i18n-aria="sideTitle1"></section>
   </main>
+
+  <div class="spdpage" id="spdPage"></div>
 
   <footer class="src"><span id="footerText"></span><br><span id="buildInfo"></span></footer>
 </div>
@@ -398,6 +481,30 @@ const T = {
     natTitle: '选择性格', commonNat: m => `${m}常用性格 · 采用率`, allNat: '全部性格',
     natHint: '行是提升 10% 的能力，列是降低 10% 的能力；对角线上的性格没有修正。',
     androidDl: '安卓版 App 下载（APK）',
+    viewAria: '页面', viewCalc: '伤害计算', viewSpeed: '速度线',
+    spdTitle: '速度线', spdNote: '等级 50 · 个体值 31 · 显示实际速度',
+    spdPool: '宝可梦范围', pool: (p, n) => ({doubles: `双打常用（${n}）`, singles: `单打常用（${n}）`, all: `全部（${n}）`}[p]),
+    spdTiers: '性格与能力点', tier: {max: '极速', neu: '准速', zero: '无振', min: '最慢', set: '常用调整'},
+    tierLegend: '极速＝速度↑性格＋32 点 · 准速＝无修正性格＋32 点 · 无振＝0 点 · 最慢＝速度↓性格＋0 点 · 常用调整＝单打采用或推荐配置里的其他速度点数',
+    spdMods: '道具与场上变化', mod: {none: '无加成', scarf: '讲究围巾', p1: '速度+1', p2: '速度+2', tw: '顺风', ab: '特性加速', m1: '速度−1', par: '麻痹'},
+    modLegend: '讲究围巾 ×1.5 · 速度+1 ×1.5 · 速度+2 ×2 · 顺风 ×2 · 特性加速 ×2（叶绿素、悠游自如、拨沙、拨雪、冲浪之尾、轻装）· 速度−1 ×⅔ · 麻痹 ×½',
+    abWhen: {Sun: '晴天', Rain: '下雨', Sand: '沙暴', Snow: '下雪', Electric: '电气场地', item: '道具用掉后'},
+    spdCmp: '和这个速度比较', cmpPh: '如 150', yourLine: v => `你的速度 ${v}`,
+    spdQ: '筛选宝可梦', spdQPh: '名字或拼音', spdTr: '戏法空间（慢的排前面）',
+    spdEmpty: '没有符合条件的速度线。', spdCount: (n, m) => `${n} 条速度线 · ${m} 只宝可梦`,
+    spdShowAll: n => `显示全部 ${n} 条`, spdPartial: '条目太多，先显示比较速度附近的一段。',
+    setRec: '推荐配置', scarfUse: p => `采用 ${p}%`,
+    nearOpen: '对照附近的速度线', nearTitle: '附近的速度线', nearCommon: m => `${m}常用宝可梦`, nearCur: '当前速度', nearRaw: v => `实数值 ${v}`,
+    nearMore: '展开更多', nearLess: '收起', nearAll: '去速度线页', nearAllHead: '全部宝可梦（含讲究围巾）', same: '同速',
+    nearTr: '戏法空间中慢的先动', spdLink: '速度线',
+    cmpShort: '比较速度', qShort: '筛选', infoAria: '说明', rowCmp: v => `把 ${v} 设为比较速度`, tipCalc: '计算',
+    tipTier: (k, up, dn) => ({max: `极速：提升速度的性格（${up}）＋速度 32 点`, neu: '准速：不影响速度的性格＋速度 32 点', zero: '无振：速度 0 点，性格不影响速度', min: `最慢：降低速度的性格（${dn}）＋速度 0 点，多用于戏法空间`}[k]),
+    tipSetU: (n, s, p) => `单打采用率 ${p}% 的配置：${n}，速度 ${s} 点`, tipSetR: (n, s) => `推荐配置：${n}，速度 ${s} 点`,
+    tipMod: {scarf: '讲究围巾：速度 ×1.5，但只能一直使用同一个招式', p1: '速度+1：×1.5（如加速特性发动一次）', p2: '速度+2：×2（如高速移动）', tw: '顺风：己方速度 ×2，持续 4 回合', m1: '速度−1：×⅔（如被电网、冰冻之风打中）', par: '麻痹：速度 ×½'},
+    tipAb: (a, k) => `${a}：${{Sun: '晴天时', Rain: '下雨时', Sand: '沙暴时', Snow: '下雪时', Electric: '电气场地上', item: '道具用掉后'}[k]}速度 ×2`,
+    tipScarfUse: p => `（这只宝可梦的围巾采用率 ${p}%）`,
+    tipTie: '同速：每回合随机决定谁先动', tipFaster: (n, f) => `比你快 ${n} → ${f ? '对方先动' : '戏法空间里你先动'}`, tipSlower: (n, f) => `比你慢 ${n} → ${f ? '戏法空间里对方先动' : '你先动'}`,
+    tipHow: '鼠标移到条目上，或在手机上点一下条目，可以看到这条速度线是怎么算出来的。',
     built: (d, n, m) => `数据整理于 ${d} · 共 ${n} 只宝可梦（另含 ${m} 种超级进化形态）`,
     footer: '伤害公式：<a href="https://github.com/smogon/damage-calc" target="_blank" rel="noopener">Smogon Damage Calculator</a>（已按宝可梦冠军规则计算）· 可用宝可梦与招式：<a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noopener">Pokémon Showdown</a> 的 M-C 数据 · 双打常用配置与概率：<a href="https://www.pikalytics.com/pokedex/gen9championsvgc2026regmc" target="_blank" rel="noopener">Pikalytics</a> M-C 双打统计（使用率前 50）· 单打常用配置与概率：<a href="https://gamewith.ai/pokemon-champions/zh-hans/usage-ranking" target="_blank" rel="noopener">GameWith</a> 单打对战数据（使用率前 50，含性格与能力点分配）· 推荐性格与能力点：Smogon 分析 · 名称：<a href="https://github.com/PokeAPI/pokeapi" target="_blank" rel="noopener">PokeAPI</a><br>双打的百分比来自 Pikalytics 收集的对战，并非游戏内官方数据；单打的数据赛季标在每只宝可梦旁边，个别宝可梦的数据较旧。没有统计的宝可梦按种族值自动填入配置。',
   },
@@ -444,6 +551,30 @@ const T = {
     natTitle: '性格を選ぶ', commonNat: m => `${m}の性格採用率`, allNat: 'すべての性格',
     natHint: '行の能力が1.1倍、列の能力が0.9倍になります。対角線上の性格は補正なしです。',
     androidDl: 'Android版アプリをダウンロード（APK）',
+    viewAria: 'ページ', viewCalc: 'ダメージ計算', viewSpeed: '素早さライン',
+    spdTitle: '素早さライン', spdNote: 'レベル50 · 個体値31 · 実数値で表示',
+    spdPool: '対象のポケモン', pool: (p, n) => ({doubles: `ダブル上位（${n}）`, singles: `シングル上位（${n}）`, all: `すべて（${n}）`}[p]),
+    spdTiers: '性格と能力ポイント', tier: {max: '最速', neu: '準速', zero: '無振り', min: '最遅', set: '調整'},
+    tierLegend: '最速＝すばやさ↑性格＋32 · 準速＝補正なし＋32 · 無振り＝0 · 最遅＝すばやさ↓性格＋0 · 調整＝シングルの採用型やおすすめ型にあるそれ以外の振り方',
+    spdMods: '持ち物と場の状態', mod: {none: '補正なし', scarf: 'こだわりスカーフ', p1: 'すばやさ+1', p2: 'すばやさ+2', tw: 'おいかぜ', ab: '特性で2倍', m1: 'すばやさ−1', par: 'まひ'},
+    modLegend: 'スカーフ ×1.5 · +1 ×1.5 · +2 ×2 · おいかぜ ×2 · 特性 ×2（ようりょくそ・すいすい・すなかき・ゆきかき・サーフテール・かるわざ）· −1 ×⅔ · まひ ×½',
+    abWhen: {Sun: 'はれ', Rain: 'あめ', Sand: 'すなあらし', Snow: 'ゆき', Electric: 'エレキフィールド', item: '持ち物を使った後'},
+    spdCmp: 'この素早さと比べる', cmpPh: '例 150', yourLine: v => `あなたの素早さ ${v}`,
+    spdQ: 'ポケモンで絞り込む', spdQPh: '名前', spdTr: 'トリックルーム（遅い順）',
+    spdEmpty: '条件に合うラインがありません。', spdCount: (n, m) => `${n}ライン · ポケモン${m}匹`,
+    spdShowAll: n => `すべて表示（${n}ライン）`, spdPartial: '件数が多いため、比べる素早さの付近だけ表示しています。',
+    setRec: 'おすすめ型', scarfUse: p => `採用率 ${p}%`,
+    nearOpen: '近い素早さラインを見る', nearTitle: '近い素早さライン', nearCommon: m => `${m}の上位`, nearCur: '現在の素早さ', nearRaw: v => `実数値 ${v}`,
+    nearMore: 'もっと見る', nearLess: '閉じる', nearAll: 'ライン一覧へ', nearAllHead: 'すべてのポケモン（スカーフ込み）', same: '同速',
+    nearTr: 'トリックルーム中は遅い方が先に動く', spdLink: '素早さライン',
+    cmpShort: '比べる', qShort: '絞り込み', infoAria: '説明', rowCmp: v => `${v} を比べる基準にする`, tipCalc: '計算',
+    tipTier: (k, up, dn) => ({max: `最速：すばやさが上がる性格（${up}）＋32`, neu: '準速：すばやさに補正のない性格＋32', zero: '無振り：すばやさ0・性格補正なし', min: `最遅：すばやさが下がる性格（${dn}）＋0。トリックルーム向け`}[k]),
+    tipSetU: (n, s, p) => `シングル採用率 ${p}% の型：${n}・すばやさ ${s}`, tipSetR: (n, s) => `おすすめ型：${n}・すばやさ ${s}`,
+    tipMod: {scarf: 'こだわりスカーフ：すばやさ×1.5、ただし同じわざしか出せない', p1: 'すばやさ+1：×1.5（かそくの発動1回など）', p2: 'すばやさ+2：×2（こうそくいどうなど）', tw: 'おいかぜ：味方のすばやさ×2（4ターン）', m1: 'すばやさ−1：×⅔（エレキネット・こごえるかぜなど）', par: 'まひ：すばやさ×½'},
+    tipAb: (a, k) => `${a}：${{Sun: 'はれのとき', Rain: 'あめのとき', Sand: 'すなあらしのとき', Snow: 'ゆきのとき', Electric: 'エレキフィールドで', item: '持ち物を使った後'}[k]} すばやさ×2`,
+    tipScarfUse: p => `（このポケモンのスカーフ採用率 ${p}%）`,
+    tipTie: '同速：ターンごとにランダムで先攻が決まる', tipFaster: (n, f) => `あなたより ${n} 速い → ${f ? '相手が先に動く' : 'トリルではあなたが先'}`, tipSlower: (n, f) => `あなたより ${n} 遅い → ${f ? 'トリルでは相手が先' : 'あなたが先に動く'}`,
+    tipHow: 'マウスを乗せるか、スマホではタップすると、そのラインの計算内容が表示されます。',
     built: (d, n, m) => `データ更新 ${d} · ポケモン${n}匹（ほかにメガシンカ${m}種）`,
     footer: 'ダメージ計算式：<a href="https://github.com/smogon/damage-calc" target="_blank" rel="noopener">Smogon Damage Calculator</a>（ポケモンチャンピオンズのルールで計算）· 使えるポケモンとわざ：<a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noopener">Pokémon Showdown</a> の M-C データ · ダブルの採用型と採用率：<a href="https://www.pikalytics.com/pokedex/gen9championsvgc2026regmc" target="_blank" rel="noopener">Pikalytics</a> の M-C ダブル統計（使用率上位50）· シングルの採用型と採用率：<a href="https://gamewith.ai/pokemon-champions/zh-hans/usage-ranking" target="_blank" rel="noopener">GameWith</a> のシングル対戦データ（使用率上位50、性格と能力ポイント配分を含む）· おすすめの性格と能力ポイント：Smogon の分析 · 名前：<a href="https://github.com/PokeAPI/pokeapi" target="_blank" rel="noopener">PokeAPI</a><br>ダブルの数値は Pikalytics が集めた対戦によるもので、ゲーム内の公式データではありません。シングルのデータのシーズンは各ポケモンの横に表示しています（一部は古いデータです）。データのないポケモンは種族値から型を自動で入れています。',
   },
@@ -491,6 +622,30 @@ const T = {
     natTitle: 'Choose nature', commonNat: m => `Common natures in ${m}`, allNat: 'All natures',
     natHint: 'Rows raise a stat by 10%, columns lower one by 10%. Natures on the diagonal are neutral.',
     androidDl: 'Download the Android app (APK)',
+    viewAria: 'Page', viewCalc: 'Damage calc', viewSpeed: 'Speed tiers',
+    spdTitle: 'Speed tiers', spdNote: 'Lv 50 · 31 IVs · actual Speed stats',
+    spdPool: 'Pokémon', pool: (p, n) => ({doubles: `Doubles top (${n})`, singles: `Singles top (${n})`, all: `All (${n})`}[p]),
+    spdTiers: 'Nature & stat points', tier: {max: 'Max+', neu: 'Max', zero: 'Uninvested', min: 'Min−', set: 'Custom'},
+    tierLegend: 'Max+ = +Spe nature, 32 points · Max = neutral nature, 32 · Uninvested = 0 · Min− = −Spe nature, 0 · Custom = other Speed investments from singles usage or suggested sets',
+    spdMods: 'Items & field', mod: {none: 'No boost', scarf: 'Choice Scarf', p1: '+1 Spe', p2: '+2 Spe', tw: 'Tailwind', ab: 'Speed ability', m1: '−1 Spe', par: 'Paralysis'},
+    modLegend: 'Scarf ×1.5 · +1 ×1.5 · +2 ×2 · Tailwind ×2 · ability ×2 (Chlorophyll, Swift Swim, Sand Rush, Slush Rush, Surge Surfer, Unburden) · −1 ×⅔ · paralysis ×½',
+    abWhen: {Sun: 'Sun', Rain: 'Rain', Sand: 'Sand', Snow: 'Snow', Electric: 'Electric Terrain', item: 'after its item is used'},
+    spdCmp: 'Compare with a Speed', cmpPh: 'e.g. 150', yourLine: v => `Your Speed ${v}`,
+    spdQ: 'Filter Pokémon', spdQPh: 'Name', spdTr: 'Trick Room (slowest first)',
+    spdEmpty: 'No speed tiers match.', spdCount: (n, m) => `${n} tiers · ${m} Pokémon`,
+    spdShowAll: n => `Show all ${n} tiers`, spdPartial: 'Long list: showing the part near the compared Speed first.',
+    setRec: 'suggested', scarfUse: p => `${p}% use`,
+    nearOpen: 'Compare nearby speed tiers', nearTitle: 'Nearby speed tiers', nearCommon: m => `common in ${m}`, nearCur: 'Current Speed', nearRaw: v => `stat ${v}`,
+    nearMore: 'Show more', nearLess: 'Show less', nearAll: 'Speed tiers page', nearAllHead: 'All Pokémon (incl. Choice Scarf)', same: 'Tie',
+    nearTr: 'Under Trick Room the slower one moves first', spdLink: 'Speed tiers',
+    cmpShort: 'Compare', qShort: 'Filter', infoAria: 'About these numbers', rowCmp: v => `Compare with ${v}`, tipCalc: 'Calc',
+    tipTier: (k, up, dn) => ({max: `Max+: Speed-raising nature (${up}) + 32 Speed points`, neu: 'Max: neutral nature + 32 Speed points', zero: 'Uninvested: 0 Speed points, neutral nature', min: `Min−: Speed-lowering nature (${dn}) + 0 points, for Trick Room`}[k]),
+    tipSetU: (n, s, p) => `Singles set used ${p}%: ${n}, ${s} Speed points`, tipSetR: (n, s) => `Suggested set: ${n}, ${s} Speed points`,
+    tipMod: {scarf: 'Choice Scarf: Speed ×1.5, but locked into one move', p1: '+1 Speed: ×1.5 (e.g. one Speed Boost)', p2: '+2 Speed: ×2 (e.g. Agility)', tw: "Tailwind: your side's Speed ×2 for 4 turns", m1: '−1 Speed: ×⅔ (e.g. Electroweb, Icy Wind)', par: 'Paralysis: Speed ×½'},
+    tipAb: (a, k) => `${a}: Speed ×2 ${{Sun: 'in Sun', Rain: 'in Rain', Sand: 'in Sand', Snow: 'in Snow', Electric: 'on Electric Terrain', item: 'after its item is used'}[k]}`,
+    tipScarfUse: p => ` (${p}% of this Pokémon carry one)`,
+    tipTie: 'Speed tie: random order each turn', tipFaster: (n, f) => `${n} faster than you → ${f ? 'they move first' : 'you move first under Trick Room'}`, tipSlower: (n, f) => `${n} slower than you → ${f ? 'they move first under Trick Room' : 'you move first'}`,
+    tipHow: 'Hover over an entry, or tap it on a phone, to see how that Speed is worked out.',
     built: (d, n, m) => `Data compiled ${d} · ${n} Pokémon (plus ${m} Mega forms)`,
     footer: 'Damage formula: <a href="https://github.com/smogon/damage-calc" target="_blank" rel="noopener">Smogon Damage Calculator</a> (using Pokémon Champions rules) · Legal Pokémon and moves: <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noopener">Pokémon Showdown</a> Reg M-C data · Doubles sets and usage: <a href="https://www.pikalytics.com/pokedex/gen9championsvgc2026regmc" target="_blank" rel="noopener">Pikalytics</a> Reg M-C doubles stats (top 50) · Singles sets and usage: <a href="https://gamewith.ai/pokemon-champions/zh-hans/usage-ranking" target="_blank" rel="noopener">GameWith</a> singles battle data (top 50, with natures and stat point spreads) · Suggested natures and spreads: Smogon analyses · Names: <a href="https://github.com/PokeAPI/pokeapi" target="_blank" rel="noopener">PokeAPI</a><br>Doubles percentages come from battles collected by Pikalytics, not official in-game data. The season of each singles dataset is shown next to the Pokémon; a few are older. Pokémon without usage data get a set built from their base stats.',
   },
@@ -693,14 +848,17 @@ function hpBar(res) {
   const afterMax = Math.max(0, curP - res.hiP), afterMin = Math.max(0, curP - res.loP);
   return `<div class="hpbar" style="--hpc:${hpColor(afterMin)}" aria-hidden="true"><div class="left" style="width:${afterMax}%"></div><div class="range" style="left:${afterMax}%;width:${afterMin - afterMax}%"></div></div>`;
 }
+function speedAbOn(i) {
+  const s = S.sides[i], ab = abilityOf(s), w = S.field.weather;
+  return (ab === 'Swift Swim' && w === 'Rain') || (ab === 'Chlorophyll' && w === 'Sun') || (ab === 'Sand Rush' && w === 'Sand') || (ab === 'Slush Rush' && w === 'Snow') || (ab === 'Surge Surfer' && S.field.terrain === 'Electric') || (ab === 'Unburden' && s.abOn);
+}
+// same order and rounding as the game (and the Smogon calc): stage, then the chained 4096-based modifiers, then paralysis
 function speedOf(i) {
-  const s = S.sides[i], st = statsOf(s), ab = abilityOf(s), w = S.field.weather;
-  let v = Math.floor(st.spe * stageMult(s.boosts.spe));
-  if (s.item === 'Choice Scarf') v = Math.floor(v * 1.5);
-  if ((ab === 'Swift Swim' && w === 'Rain') || (ab === 'Chlorophyll' && w === 'Sun') || (ab === 'Sand Rush' && w === 'Sand') || (ab === 'Slush Rush' && w === 'Snow') || (ab === 'Surge Surfer' && S.field.terrain === 'Electric') || (ab === 'Unburden' && s.abOn)) v *= 2;
-  if (S.field.sides[i].isTailwind) v *= 2;
-  if (s.status === 'par') v = Math.floor(v * 0.5);
-  return v;
+  const s = S.sides[i], mods = [];
+  if (S.field.sides[i].isTailwind) mods.push(8192);
+  if (speedAbOn(i)) mods.push(8192);
+  if (s.item === 'Choice Scarf') mods.push(6144);
+  return finalSpeed(statsOf(s).spe, s.boosts.spe, mods, s.status === 'par');
 }
 // translate the calc's English description (left of the colon)
 const PHRASES = {
@@ -762,7 +920,8 @@ function load() {
     else { const old = localStorage.getItem(STORE_V1); if (old) saved = {mode: 'doubles', doubles: JSON.parse(old)}; }
   } catch (e) { /* storage unavailable */ }
   saved = saved || {};
-  const app = {mode: saved.mode === 'singles' ? 'singles' : 'doubles', lang: LANGS[saved.lang] ? saved.lang : 'zh'};
+  const app = {mode: saved.mode === 'singles' ? 'singles' : 'doubles', lang: LANGS[saved.lang] ? saved.lang : 'zh', view: saved.view === 'speed' ? 'speed' : 'calc'};
+  app.spd = validSpd(saved.spd, app.mode);
   for (const m of MODES) app[m] = validState(saved[m]) ? Object.assign(defaultState(m), saved[m], {open: {d: -1, s: -1}}) : defaultState(m);
   return app;
 }
@@ -772,6 +931,7 @@ function setMode(m) {
   if (!MODES.includes(m) || m === APP.mode) return;
   if (sheet) closeSheet();
   APP.mode = m; S = APP[m];
+  if (APP.spd.pool !== 'all') APP.spd.pool = m;
   renderAll();
 }
 function setLang(l) {
@@ -795,7 +955,7 @@ function mono(name, sm) {
   const root = SP[(sp.m || name).split('-')[0]] || SP[sp.m || name];
   const label = LANG === 'ja' ? root.j : LANG === 'en' ? root.e : root.z;
   const ch = Array.from(label)[0] || '?';
-  return `<span class="mono${sm ? ' sm' : ''}" style="--t1:${t1};--t2:${t2}" aria-hidden="true">${esc(ch)}${sp.m ? '<span class="mg">M</span>' : ''}</span>`;
+  return `<span class="mono${sm === 'xs' ? ' xs' : sm ? ' sm' : ''}" style="--t1:${t1};--t2:${t2}" aria-hidden="true">${esc(ch)}${sp.m ? '<span class="mg">M</span>' : ''}</span>`;
 }
 const pctTag = p => (p === undefined ? '' : `<span class="pct">${fmt(p)}%</span>`);
 
@@ -875,11 +1035,12 @@ function renderSide(i) {
   STATS.forEach((k, idx) => {
     const cls = m.up === k && m.down !== k ? 'u' : m.down === k && m.up !== k ? 'd' : '';
     const sn = STAT_N(k);
-    h += `<div class="srow"><span class="sl ${cls}">${sn}${cls === 'u' ? '↑' : cls === 'd' ? '↓' : ''}<small>${fsp.b[idx]}</small></span>` +
+    h += `<div class="srow"${k === 'spe' ? ` data-spdrow="${i}"` : ''}><span class="sl ${cls}">${sn}${cls === 'u' ? '↑' : cls === 'd' ? '↓' : ''}<small>${fsp.b[idx]}</small></span>` +
       `<button class="step" type="button" data-act="spstep" data-i="${i}" data-k="${k}" data-v="-1" aria-label="${t('minus', sn)}">−</button>` +
       `<input type="range" min="0" max="32" step="1" value="${s.sp[k]}" id="sp${i}${k}" data-act="sp" data-i="${i}" data-k="${k}" aria-label="${t('spAria', sn)}" style="--p:${s.sp[k] / 32 * 100}%">` +
       `<button class="step" type="button" data-act="spstep" data-i="${i}" data-k="${k}" data-v="1" aria-label="${t('plus', sn)}">+</button>` +
-      `<span class="sv${s.sp[k] ? ' on' : ''}" id="sv${i}${k}">${s.sp[k]}</span><span class="st" id="st${i}${k}">${st[k]}</span></div>`;
+      `<span class="sv${s.sp[k] ? ' on' : ''}" id="sv${i}${k}">${s.sp[k]}</span><span class="st" id="st${i}${k}">${st[k]}</span></div>` +
+      (k === 'spe' ? `<div class="spdnear" id="near${i}"></div>` : '');
   });
   h += '</div>';
   // moves
@@ -925,7 +1086,7 @@ function renderResults() {
   if (v0 !== v1) who = t('first', (v0 > v1) !== tr ? t('us') : t('them'));
   const n0 = spName(formOf(S.sides[0])), n1 = spName(formOf(S.sides[1]));
   let h = `<div class="rhead"><h2>${t('results')}</h2><div class="seg" role="group" aria-label="${t('dirAria')}"><button type="button" data-act="dir" data-v="0" aria-pressed="${S.dir === 0}">${t('dirUs')}</button><button type="button" data-act="dir" data-v="1" aria-pressed="${S.dir === 1}">${t('dirThem')}</button></div></div>`;
-  h += `<div class="speed">${t('speed')} <span>${esc(n0)} <b>${v0}</b></span><span>${esc(n1)} <b>${v1}</b></span>${tr ? `<span class="tc" style="--tc:#704170">${t('tr')}</span>` : ''}<span class="who">${who}</span></div>`;
+  h += `<div class="speed">${t('speed')} <span class="sv" tabindex="0" data-tip="${esc(myTip(0))}">${esc(n0)} <b>${v0}</b></span><span class="sv" tabindex="0" data-tip="${esc(myTip(1))}">${esc(n1)} <b>${v1}</b></span>${tr ? `<span class="tc" style="--tc:#704170">${t('tr')}</span>` : ''}<span class="who">${who}</span><button class="spdlink" type="button" data-act="gospeed" data-i="0">${t('spdLink')} ›</button></div>`;
   const cat = t('cat');
   for (const d of [0, 1]) {
     const an = d ? n1 : n0, dn = d ? n0 : n1;
@@ -960,6 +1121,8 @@ function renderResults() {
   }
   $('results').innerHTML = h;
   renderFocus();
+  renderNear(0); renderNear(1);
+  dropStaleTip();
 }
 function renderFocus() {
   const {d, s} = S.focus;
@@ -972,7 +1135,7 @@ function renderFocus() {
   el.innerHTML = `<span class="fl"><b>${esc(MOVE_N(res.name))}</b> → ${esc(dn)}</span>` + (ks ? `<span class="ko ${ko.c}">${ks}</span>` : res.status ? `<span class="ko k0">${t('statusShort')}</span>` : '') +
     (res.loP !== undefined && res.hi > 0 ? `<span class="fp">${fmt(res.loP)}–${fmt(res.hiP)}%</span>${hpBar(res)}` : '');
 }
-function renderAll() { renderTabs(); renderSide(0); renderSide(1); renderField(); renderResults(); save(); }
+function renderAll() { renderTabs(); renderSide(0); renderSide(1); renderField(); renderResults(); renderView(); save(); }
 function refreshStats(i) {
   const s = S.sides[i], st = statsOf(s), tot = spTotal(s);
   for (const k of STATS) {
@@ -1141,10 +1304,367 @@ function natureSheet(i) {
   });
 }
 
+// ---------- speed tiers ----------
+const SPD_AB = {Chlorophyll: 'Sun', 'Swift Swim': 'Rain', 'Sand Rush': 'Sand', 'Slush Rush': 'Snow', 'Surge Surfer': 'Electric', Unburden: 'item'};
+const TIERS = [{k: 'max', n: 110, sp: 32}, {k: 'neu', n: 100, sp: 32}, {k: 'zero', n: 100, sp: 0}, {k: 'min', n: 90, sp: 0}];
+const TIER_KEYS = ['max', 'neu', 'zero', 'min', 'set'];
+const SPD_MODS = [{k: 'none'}, {k: 'scarf', m: [6144]}, {k: 'p1', st: 1}, {k: 'p2', st: 2}, {k: 'tw', m: [8192]}, {k: 'ab', m: [8192]}, {k: 'm1', st: -1}, {k: 'par', par: true}];
+const MOD_KEYS = SPD_MODS.map(m => m.k);
+const POOLS = ['doubles', 'singles', 'all'];
+const NEAR_MODS = ['none', 'scarf'];
+function chainMods(mods) { let M = 4096; for (const m of mods) if (m !== 4096) M = (M * m + 2048) >> 12; return M; }
+const pokeRound = x => (x % 1 > 0.5 ? Math.ceil(x) : Math.floor(x));
+const stageStat = (v, n) => (n > 0 ? Math.floor(v * (2 + n) / 2) : n < 0 ? Math.floor(v * 2 / (2 - n)) : v);
+function finalSpeed(raw, stage, mods, par) {
+  let v = stageStat(raw, stage || 0);
+  if (mods && mods.length) v = pokeRound(v * chainMods(mods) / 4096);
+  if (par) v = Math.floor(v * 50 / 100);
+  return v;
+}
+const rawSpe = (b, sp, n) => Math.floor((b + 20 + sp) * n / 100);
+const speNat = nat => { const m = natMods(nat); return m.up === 'spe' && m.down !== 'spe' ? 110 : m.down === 'spe' && m.up !== 'spe' ? 90 : 100; };
+function defaultSpd(mode) { return {pool: mode, tiers: TIER_KEYS.slice(), mods: NEAR_MODS.slice(), q: '', cmp: '', tr: false}; }
+function validSpd(p, mode) {
+  const d = defaultSpd(mode);
+  if (!p || typeof p !== 'object') return d;
+  const tiers = Array.isArray(p.tiers) ? p.tiers.filter(k => TIER_KEYS.includes(k)) : [];
+  const mods = Array.isArray(p.mods) ? p.mods.filter(k => MOD_KEYS.includes(k)) : [];
+  return {pool: POOLS.includes(p.pool) ? p.pool : d.pool, tiers: tiers.length ? tiers : d.tiers, mods: mods.length ? mods : d.mods,
+    q: typeof p.q === 'string' ? p.q : '', cmp: /^\d{1,4}$/.test(p.cmp || '') ? p.cmp : '', tr: !!p.tr};
+}
+// usage rank of a form's base species in a format (undefined when outside the top 50)
+const rankIn = (form, mode) => { const b = SP[SP[form].m || form]; return mode === 'singles' ? b.rs : b.r ? b.r[0] : undefined; };
+const rankNum = (form, mode) => rankIn(form, mode) || 999;
+const stoneShare = (base, mode) => { const u = usageOf(base, mode); return u ? (SP[base].x || []).reduce((a, [st]) => a + (pctMap(u.items)[st] || 0), 0) : 0; };
+// forms in a pool: the format's top 50, plus the Mega forms people actually run there
+function poolForms(pool) {
+  if (pool === 'all') return D.species.map(s => s.n);
+  const out = [];
+  for (const s of D.species.filter(x => !x.m && rankIn(x.n, pool)).sort((a, b) => rankNum(a.n, pool) - rankNum(b.n, pool))) {
+    out.push(s.n);
+    const u = usageOf(s.n, pool);
+    for (const [stone, form] of s.x || []) if (u && (pctMap(u.items)[stone] || 0) >= 1 && SP[form]) out.push(form);
+  }
+  return out;
+}
+// other Speed investments seen in singles usage (pool != doubles) or in the suggested sets
+function setSpeeds(form, pool) {
+  const sp = SP[form], base = sp.m || form, b = sp.b[5], out = [];
+  const add = (nat, spe, pct, scarf) => {
+    const n = speNat(nat);
+    if ((spe === 32 && n !== 90) || (spe === 0 && n !== 110)) return; // already a standard tier
+    const raw = rawSpe(b, spe, n);
+    if (!out.some(o => o.raw === raw && o.scarf === scarf)) out.push({tier: 'set', raw, nat, spe, pct, scarf});
+  };
+  if (pool !== 'doubles' && !sp.m) {
+    const u = D.usageS[base];
+    if (u && u.spreads) for (const [s2, p] of u.spreads.slice(0, 8)) if (p >= 0.5) add(bestNature(u.natures, s2, 'Hardy'), s2.spe || 0, p, false);
+  }
+  for (const st of D.sets[form] || []) if (D.natures[st.nature]) add(st.nature, (st.sp || {}).spe || 0, undefined, st.item === 'Choice Scarf' && !sp.m);
+  return out;
+}
+const ENT_CACHE = {};
+// every (form, nature/points, item/field) combination as {f, v, r, mod, ab, scarfP}
+// real = only what people actually run (used for the short list beside the slider)
+function speedEntries(pool, tiers, mods, real) {
+  const key = [pool, tiers.join(), mods.join(), real ? 1 : 0, curMode()].join('|');
+  if (ENT_CACHE[key]) return ENT_CACHE[key];
+  const um = pool === 'all' ? curMode() : pool, out = [];
+  for (const form of poolForms(pool)) {
+    const sp = SP[form], base = sp.m || form, b = sp.b[5], u = usageOf(base, um);
+    if (real && !sp.m && stoneShare(base, um) >= 80) continue; // almost always Mega Evolves
+    const scarfP = u ? pctMap(u.items)['Choice Scarf'] : undefined;
+    const slowNat = um === 'singles' && u && u.natures && u.natures.some(([n, p]) => speNat(n) === 90 && p >= 5);
+    const raws = [];
+    for (const tr of TIERS) {
+      if (!tiers.includes(tr.k)) continue;
+      if (real && tr.k === 'zero' && b > 80) continue;
+      if (real && tr.k === 'min' && b > 60 && !slowNat) continue;
+      raws.push({tier: tr.k, raw: rawSpe(b, tr.sp, tr.n)});
+    }
+    if (tiers.includes('set')) for (const e of setSpeeds(form, pool)) if (e.scarf || !raws.some(r => r.raw === e.raw)) raws.push(e);
+    const ab = sp.a.find(a => SPD_AB[a]);
+    for (const md of SPD_MODS) {
+      if (!mods.includes(md.k)) continue;
+      if (md.k === 'scarf' && (sp.m || (real && !(scarfP >= 2)))) continue;
+      if (md.k === 'ab' && !ab) continue;
+      for (const r of raws) {
+        if (r.scarf) { // a suggested Choice Scarf set: always shown holding the Scarf
+          if (md.k === 'none' && mods.includes('scarf')) out.push({f: form, v: finalSpeed(r.raw, 0, [6144]), r, mod: 'scarf', ab: '', scarfP});
+          continue;
+        }
+        if (real && md.k === 'scarf' && r.tier !== 'max' && r.tier !== 'neu') continue;
+        out.push({f: form, v: finalSpeed(r.raw, md.st, md.m, md.par), r, mod: md.k, ab: md.k === 'ab' ? ab : '', scarfP});
+      }
+    }
+  }
+  // the same set can come from two sources (e.g. a suggested Scarf set and the plain set with Scarf added)
+  const seen = new Set();
+  return (ENT_CACHE[key] = out.filter(e => { const k = [e.f, e.v, e.r.tier, e.r.nat, e.r.spe, e.mod].join('|'); return !seen.has(k) && seen.add(k); }));
+}
+const paren = s => (LANG === 'en' ? ` (${s})` : `（${s}）`);
+function condText(e) {
+  const r = e.r;
+  let a = r.tier === 'set'
+    ? `${NAT_N(r.nat)} ${LANG === 'en' ? r.spe + ' Spe' : 'S' + r.spe}${r.pct !== undefined ? ' · ' + fmt(r.pct) + '%' : ' · ' + t('setRec')}`
+    : t('tier')[r.tier];
+  if (e.mod === 'ab') a += ' · ' + AB_N(e.ab) + paren(t('abWhen')[SPD_AB[e.ab]]);
+  else if (e.mod !== 'none') a += ' · ' + t('mod')[e.mod] + (e.mod === 'scarf' && e.scarfP >= 1 ? paren(t('scarfUse', fmt(e.scarfP))) : '');
+  return a;
+}
+const rankTag = f => { const r = rankIn(f, curMode()); return r ? `<span class="pct">#${r}</span>` : ''; };
+
+// --- explanations shown on hover (mouse) or tap (touch) ---
+const colon = () => (LANG === 'en' ? ': ' : '：');
+const natsBy = dir => Object.keys(D.natures).filter(n => speNat(n) === (dir > 0 ? 110 : 90)).map(NAT_N).join(LANG === 'en' ? ', ' : '、');
+const MOD_X = {scarf: '1.5', p1: '1.5', p2: '2', tw: '2', ab: '2', m1: '2/3', par: '1/2'};
+function entryLines(e) {
+  const r = e.r, b = SP[e.f].b[5];
+  const spe = r.tier === 'set' ? r.spe : r.tier === 'max' || r.tier === 'neu' ? 32 : 0;
+  const n = r.tier === 'set' ? speNat(r.nat) : r.tier === 'max' ? 110 : r.tier === 'min' ? 90 : 100;
+  const out = [r.tier === 'set' ? (r.pct !== undefined ? t('tipSetU', NAT_N(r.nat), r.spe, fmt(r.pct)) : t('tipSetR', NAT_N(r.nat), r.spe)) : t('tipTier', r.tier, natsBy(1), natsBy(-1))];
+  if (e.mod === 'ab') out.push(t('tipAb', AB_N(e.ab), SPD_AB[e.ab]));
+  else if (e.mod !== 'none') out.push(t('tipMod')[e.mod] + (e.mod === 'scarf' && e.scarfP !== undefined ? t('tipScarfUse', fmt(e.scarfP)) : ''));
+  out.push(`${t('tipCalc')}${colon()}${n !== 100 ? `(${b} + 20 + ${spe}) × ${n / 100}` : `${b} + 20 + ${spe}`} = ${r.raw}${e.v !== r.raw ? ` → × ${MOD_X[e.mod]} = ${e.v}` : ''}`);
+  return out;
+}
+const cmpLine = (d, tr) => (d === 0 ? t('tipTie') : t(d > 0 ? 'tipFaster' : 'tipSlower', Math.abs(d), (d > 0) !== tr));
+// es: the entries of one Pokémon at one Speed; mine: the Speed being compared with (or null)
+function entryTip(es, mine, tr) {
+  const name = spName(es[0].f);
+  let lines;
+  if (es.length === 1) lines = [`${name} · ${condText(es[0])}`, ...entryLines(es[0])];
+  else { lines = [name]; for (const e of es) lines.push('', '▸ ' + condText(e), ...entryLines(e)); }
+  if (mine !== null && mine !== undefined) lines.push('', cmpLine(es[0].v - mine, tr));
+  return lines.join('\n');
+}
+const fracText = st => (st > 0 ? String((2 + st) / 2) : `2/${2 - st}`.replace('2/4', '1/2').replace('2/6', '1/3').replace('2/8', '1/4'));
+function myTip(i) {
+  const s = S.sides[i], f = formOf(s), n = speNat(s.nature), raw = statsOf(s).spe;
+  let calc = `${t('tipCalc')}${colon()}${n !== 100 ? `(${SP[f].b[5]} + 20 + ${s.sp.spe}) × ${n / 100}` : `${SP[f].b[5]} + 20 + ${s.sp.spe}`} = ${raw}`;
+  if (s.boosts.spe) calc += ` → ${STAT_N('spe')}${s.boosts.spe > 0 ? '+' : '−'}${Math.abs(s.boosts.spe)} × ${fracText(s.boosts.spe)}`;
+  if (S.field.sides[i].isTailwind) calc += ` → ${t('mod').tw} × 2`;
+  if (speedAbOn(i)) calc += ` → ${AB_N(abilityOf(s))} × 2`;
+  if (s.item === 'Choice Scarf') calc += ` → ${t('mod').scarf} × 1.5`;
+  if (s.status === 'par') calc += ` → ${t('mod').par} × 1/2`;
+  const v = speedOf(i);
+  if (v !== raw) calc += ` = ${v}`;
+  const lines = [`${spName(f)} · ${NAT_N(s.nature)} · ${LANG === 'en' ? s.sp.spe + ' Spe' : 'S' + s.sp.spe}`, calc];
+  if (S.field.trickRoom) lines.push(t('nearTr'));
+  return lines.join('\n');
+}
+const infoTip = () => [t('tipHow'), '', t('tierLegend'), '', t('modLegend')].join('\n');
+let tipEl = null, tipFor = null, tipY = 0, lastPtr = 'mouse';
+function showTip(target) {
+  if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'tip'; tipEl.id = 'tip'; tipEl.setAttribute('role', 'tooltip'); document.body.appendChild(tipEl); }
+  if (tipFor && tipFor !== target) tipFor.removeAttribute('aria-describedby');
+  tipEl.textContent = target.dataset.tip;
+  tipEl.hidden = false;
+  tipFor = target; tipY = window.scrollY;
+  target.setAttribute('aria-describedby', 'tip');
+  const r = target.getBoundingClientRect(), w = tipEl.offsetWidth, h = tipEl.offsetHeight;
+  const x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+  let y = r.top - h - 8;
+  if (y < 8) y = r.bottom + 8;
+  tipEl.style.left = x + 'px'; tipEl.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + 'px';
+}
+function hideTip() {
+  if (tipEl) tipEl.hidden = true;
+  if (tipFor) tipFor.removeAttribute('aria-describedby');
+  tipFor = null;
+}
+const dropStaleTip = () => { if (tipFor && !tipFor.isConnected) hideTip(); };
+
+// --- the speed tiers page ---
+let SPD_ALL = false, spdTimer = 0;
+const VIEW_Y = {calc: 0, speed: 0};
+const navH = () => ($('views') ? $('views').offsetHeight : 0);
+function stickyH() { const bar = document.querySelector('.spdbar'); return navH() + (bar ? bar.offsetHeight : 0); }
+function renderView() {
+  document.body.dataset.view = APP.view;
+  for (const v of ['calc', 'speed']) $('view-' + v).setAttribute('aria-selected', String(APP.view === v));
+  if (APP.view === 'speed') { document.documentElement.style.setProperty('--navh', navH() + 'px'); renderSpeed(); }
+}
+function switchView(v) {
+  if (APP.view === v) return;
+  hideTip();
+  VIEW_Y[APP.view] = window.scrollY;
+  APP.view = v;
+  renderView(); save();
+  window.scrollTo({top: VIEW_Y[v] || 0});
+}
+// redraw without moving what the user is looking at: the row from pick() (default: the compare line) stays put on screen
+function keepPlace(draw, pick = () => $('cmpLine')) {
+  const before = pick();
+  let top = null;
+  if (before) { const r = before.getBoundingClientRect(); if (r.bottom > navH() && r.top < innerHeight) top = r.top; }
+  draw();
+  const after = top === null ? null : pick();
+  if (after) window.scrollBy(0, after.getBoundingClientRect().top - top);
+  return top !== null;
+}
+function renderSpeed() {
+  const P = APP.spd;
+  const chip = (act, v, on, label) => `<button class="chip" type="button" data-act="${act}" data-v="${v}" aria-pressed="${on}">${label}</button>`;
+  let h = '<div class="spdwrap"><section class="card spdctl">';
+  h += `<div class="sh"><h3>${t('spdTitle')}</h3><span class="note">${t('spdNote')}</span></div>`;
+  h += `<div class="fgroup"><span class="lb">${t('spdPool')}</span><div class="chips">${POOLS.map(p => chip('spdpool', p, P.pool === p, t('pool', p, poolForms(p).length))).join('')}</div></div>`;
+  h += `<div class="fgroup"><span class="lb">${t('spdTiers')}</span><div class="chips">${TIER_KEYS.map(k => chip('spdtier', k, P.tiers.includes(k), t('tier')[k])).join('')}</div><p class="legend">${t('tierLegend')}</p></div>`;
+  h += `<div class="fgroup"><span class="lb">${t('spdMods')}</span><div class="chips">${MOD_KEYS.map(k => chip('spdmod', k, P.mods.includes(k), t('mod')[k])).join('')}</div><p class="legend">${t('modLegend')}</p></div>`;
+  // compare box + filter ride along at the top of the list (sticky), so typing always shows the result
+  h += `</section><section class="card spdlist"><div class="spdbar"><div class="spdinputs">`;
+  h += `<label class="inp"><span class="pre">${t('cmpShort')}</span><input id="spdCmp" type="text" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="4" placeholder="${esc(t('cmpPh'))}" value="${esc(P.cmp)}" aria-label="${esc(t('spdCmp'))}"><button class="x" id="spdClr" type="button" data-act="spdclr" aria-label="${t('clear')}"${P.cmp ? '' : ' hidden'}>×</button></label>`;
+  h += `<label class="inp"><span class="pre">${t('qShort')}</span><input id="spdQ" type="search" enterkeyhint="search" autocomplete="off" placeholder="${esc(t('spdQPh'))}" value="${esc(P.q)}" aria-label="${esc(t('spdQ'))}"></label></div>`;
+  h += `<div class="chips spdquick">${[0, 1].map(i => { const v = speedOf(i); return chip('spdcmp', v, P.cmp === String(v), `${i ? t('them') : t('us')} ${esc(spName(formOf(S.sides[i])))} <b class="num">${v}</b>`); }).join('')}${chip('spdtr', 1, P.tr, t('spdTr'))}</div>`;
+  h += `<div class="spdcount" id="spdCount"></div></div><div id="spdList"></div></section></div>`;
+  $('spdPage').innerHTML = h;
+  renderSpeedList();
+}
+function renderSpeedList() {
+  const P = APP.spd, el = $('spdList');
+  if (!el) return;
+  const all = speedEntries(P.pool, P.tiers, P.mods, false), q = normQ(P.q || ''), mode = curMode();
+  const list = q ? all.filter(e => matches(q, spName(e.f), SP[e.f].p)) : all;
+  const groups = new Map();
+  for (const e of list) {
+    let g = groups.get(e.v); if (!g) groups.set(e.v, g = new Map());
+    let a = g.get(e.f); if (!a) g.set(e.f, a = []);
+    a.push(e);
+  }
+  const vals = [...groups.keys()].sort((a, b) => (P.tr ? a - b : b - a));
+  $('spdCount').textContent = t('spdCount', vals.length, new Set(list.map(e => e.f)).size);
+  for (const c of document.querySelectorAll('.spdquick [data-act="spdcmp"]')) c.setAttribute('aria-pressed', String(c.dataset.v === P.cmp));
+  if ($('spdClr')) $('spdClr').hidden = !P.cmp;
+  if (!vals.length) { el.innerHTML = `<p class="empty-note">${t('spdEmpty')}</p>`; dropStaleTip(); return; }
+  const cmp = /^\d+$/.test(P.cmp) ? +P.cmp : null;
+  let mi = cmp === null ? -1 : vals.findIndex(v => (P.tr ? v > cmp : v < cmp));
+  if (cmp !== null && mi < 0) mi = vals.length;
+  // very long lists: draw a window of rows (around the compared Speed) and the rest on request
+  let lo = 0, hi = vals.length;
+  if (!SPD_ALL && list.length > 2400) {
+    let budget = 2400;
+    lo = hi = Math.max(0, mi);
+    while (budget > 0 && (lo > 0 || hi < vals.length)) {
+      if (hi < vals.length) budget -= groups.get(vals[hi++]).size;
+      if (lo > 0 && budget > 0) budget -= groups.get(vals[--lo]).size;
+    }
+  }
+  const marker = `<div class="cmpline" id="cmpLine">${t('yourLine', cmp)}</div>`;
+  let h = lo > 0 || hi < vals.length ? `<p class="note">${t('spdPartial')}</p>` : '';
+  for (let k = lo; k < hi; k++) {
+    const v = vals[k];
+    if (k === mi) h += marker;
+    const forms = [...groups.get(v)].sort((a, b) => rankNum(a[0], mode) - rankNum(b[0], mode) || COLL.compare(spName(a[0]), spName(b[0])));
+    h += `<div class="tier${v === cmp ? ' tie' : ''}" data-v="${v}"><button class="tv" type="button" data-act="spdrow" data-v="${v}" aria-label="${esc(t('rowCmp', v))}">${v}</button><div class="tents">` +
+      forms.map(([f, es]) => `<span class="se" tabindex="0" data-tip="${esc(entryTip(es, cmp, P.tr))}">${mono(f, 'xs')}<span class="sn"><b>${esc(spName(f))}</b><small>${es.map(condText).join(' / ')}</small></span>${rankTag(f)}</span>`).join('') + '</div></div>';
+  }
+  if (cmp !== null && mi === hi && hi === vals.length) h += marker;
+  if (lo > 0 || hi < vals.length) h += `<button class="chip spdmore" type="button" data-act="spdall">${t('spdShowAll', vals.length)}</button>`;
+  el.innerHTML = h;
+  dropStaleTip();
+}
+// put the compare line in the middle of what is visible below the sticky bars
+function scrollToCmp(smooth = true) {
+  const m = $('cmpLine');
+  if (!m) return;
+  const top = stickyH(), y = m.getBoundingClientRect().top + window.scrollY - top - (innerHeight - top) / 2;
+  window.scrollTo({top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto'});
+}
+// bring the top of the list back into view if it has scrolled away (after the list got shorter)
+function scrollToList() {
+  const L = $('spdList');
+  if (!L) return;
+  const y = L.getBoundingClientRect().top + window.scrollY - stickyH() - 4;
+  if (window.scrollY > y) window.scrollTo({top: Math.max(0, y)});
+}
+// after a chip changes the list: keep the compare line where it was, or show it if it is somewhere else
+function redrawSpeed(draw) {
+  if (!keepPlace(draw) && APP.spd.cmp && window.matchMedia('(min-width:1000px)').matches) scrollToCmp();
+}
+function goSpeed(i) {
+  const P = APP.spd;
+  VIEW_Y[APP.view] = window.scrollY;
+  hideTip();
+  APP.view = 'speed'; P.cmp = String(speedOf(i)); P.q = '';
+  if (P.pool !== 'all') P.pool = curMode();
+  SPD_ALL = false;
+  renderView(); save(); scrollToCmp(false);
+}
+function stepCmp(d) {
+  const P = APP.spd, base = /^\d+$/.test(P.cmp) ? +P.cmp : speedOf(0);
+  P.cmp = String(Math.max(1, Math.min(9999, base + d)));
+  $('spdCmp').value = P.cmp;
+  if (!keepPlace(renderSpeedList)) scrollToCmp(false);
+  save();
+}
+
+// --- nearby tiers beside the Speed slider ---
+const NEAR = [{open: false, more: false}, {open: false, more: false}];
+function speedFactors(i) {
+  const s = S.sides[i], out = [];
+  if (s.item === 'Choice Scarf') out.push(t('mod').scarf);
+  if (s.boosts.spe) out.push(STAT_N('spe') + (s.boosts.spe > 0 ? '+' : '−') + Math.abs(s.boosts.spe));
+  if (S.field.sides[i].isTailwind) out.push(t('mod').tw);
+  if (speedAbOn(i)) out.push(AB_N(abilityOf(s)));
+  if (s.status === 'par') out.push(t('mod').par);
+  return out;
+}
+// the closest Pokémon on each side of v (at least two faster, two slower, plus ties), one entry per Pokémon and side
+function nearPick(list, v, mode) {
+  const by = (a, b) => rankNum(a.f, mode) - rankNum(b.f, mode);
+  const take = (arr, n) => { const seen = new Set(), out = []; for (const e of arr) { if (out.length >= n) break; if (!seen.has(e.f)) { seen.add(e.f); out.push(e); } } return out; };
+  const upAll = list.filter(e => e.v > v).sort((a, b) => a.v - b.v || by(a, b));
+  const dnAll = list.filter(e => e.v < v).sort((a, b) => b.v - a.v || by(a, b));
+  const tie = take(list.filter(e => e.v === v).sort(by), 3);
+  let up = take(upAll, 2), dn = take(dnAll, 2);
+  if (up.length < 2) dn = take(dnAll, 4 - up.length);
+  if (dn.length < 2) up = take(upAll, 4 - dn.length);
+  return [...up.reverse(), ...tie, ...dn];
+}
+function nearRow(e, v, tr) {
+  const d = e.v - v, cls = d === 0 ? 'same' : (d > 0) !== tr ? 'ahead' : 'behind';
+  return `<div class="nr ${cls}" tabindex="0" data-tip="${esc(entryTip([e], v, tr))}">${mono(e.f, 'xs')}<span class="nn"><b>${esc(spName(e.f))}</b><small>${condText(e)}</small></span><span class="nv">${e.v}</span><span class="nd">${d === 0 ? t('same') : d > 0 ? '+' + d : '−' + -d}</span></div>`;
+}
+function renderNear(i) {
+  const el = $('near' + i);
+  if (!el) return;
+  const N = NEAR[i];
+  if (!N.open) { el.innerHTML = `<button class="nearbar" type="button" data-act="nearopen" data-i="${i}">${t('nearOpen')} ›</button>`; return; }
+  const v = speedOf(i), raw = statsOf(S.sides[i]).spe, fac = speedFactors(i), tr = !!S.field.trickRoom, mode = curMode();
+  let h = `<div class="nearbox"><div class="nh"><span><b>${t('nearTitle')}</b> <span class="note">${t('nearCommon', modeName())}</span></span><span class="nbtn"><button class="info" type="button" data-tip="${esc(infoTip())}" aria-label="${t('infoAria')}">?</button><button class="x" type="button" data-act="nearclose" data-i="${i}" aria-label="${t('close')}">×</button></span></div>`;
+  h += `<div class="ncur" tabindex="0" data-tip="${esc(myTip(i))}">${t('nearCur')} <b>${v}</b>${fac.length ? `<span>${t('nearRaw', raw)} · ${esc(fac.join(' · '))}</span>` : ''}${tr ? `<span>${t('nearTr')}</span>` : ''}</div>`;
+  const self = formOf(S.sides[i]); // a mirror match is obvious; leave room for other Pokémon
+  h += nearPick(speedEntries(mode, TIER_KEYS, NEAR_MODS, true).filter(e => e.f !== self), v, mode).map(e => nearRow(e, v, tr)).join('');
+  if (N.more) {
+    const all = speedEntries('all', TIER_KEYS, NEAR_MODS, false);
+    const up = all.filter(e => e.v > v).sort((a, b) => a.v - b.v).slice(0, 12).reverse();
+    const same = all.filter(e => e.v === v);
+    const dn = all.filter(e => e.v < v).sort((a, b) => b.v - a.v).slice(0, 12);
+    h += `<div class="nsub">${t('nearAllHead')}</div>` + up.map(e => nearRow(e, v, tr)).join('') + same.map(e => nearRow(e, v, tr)).join('') +
+      `<div class="cmpline">${t('yourLine', v)}</div>` + dn.map(e => nearRow(e, v, tr)).join('');
+  }
+  h += `<div class="nfoot"><button class="act" type="button" data-act="nearmore" data-i="${i}" aria-expanded="${N.more}">${N.more ? t('nearLess') + ' ▴' : t('nearMore') + ' ▾'}</button><button class="act" type="button" data-act="gospeed" data-i="${i}">${t('nearAll')} ›</button></div></div>`;
+  el.innerHTML = h;
+  dropStaleTip();
+}
+// after the box shrinks, make sure its top is still on screen
+function nearIntoView(i) {
+  const el = $('near' + i);
+  if (el && el.getBoundingClientRect().top < (document.querySelector('.matchbar').offsetHeight || 0)) el.scrollIntoView({block: 'start'});
+}
+const toggleIn = (arr, k) => { const j = arr.indexOf(k); if (j >= 0) { if (arr.length > 1) arr.splice(j, 1); } else arr.push(k); };
+
 // ---------- events ----------
 document.addEventListener('click', e => {
+  // explanations: a tap shows (or moves) the bubble, tapping anywhere else closes it; with a mouse it follows hover
+  const tipT = e.target.closest('[data-tip]');
+  if (lastPtr !== 'mouse') { if (tipT && tipT !== tipFor) showTip(tipT); else hideTip(); }
+  else if (!tipT) hideTip();
   const pickEl = e.target.closest('[data-pick]');
   if (pickEl && sheet) { const cfg = sheet; closeSheet(); cfg.pick(pickEl.dataset.pick); return; }
+  // touching anything on the Speed row opens the nearby speed tiers below it
+  const sr = e.target.closest('[data-spdrow]');
+  if (sr && !NEAR[+sr.dataset.spdrow].open) { NEAR[+sr.dataset.spdrow].open = true; renderNear(+sr.dataset.spdrow); }
   const el = e.target.closest('[data-act],[data-tab]');
   if (!el) return;
   if (el.dataset.tab !== undefined && !el.dataset.act) {
@@ -1191,12 +1711,50 @@ document.addEventListener('click', e => {
       renderResults(); save(); break;
     }
     case 'crit': { const d = +el.dataset.d; S.sides[d].crit[+k] = !S.sides[d].crit[+k]; renderResults(); save(); break; }
+    case 'view': switchView(v); break;
+    case 'spdpool': APP.spd.pool = v; SPD_ALL = false; redrawSpeed(renderSpeed); save(); break;
+    case 'spdtier': toggleIn(APP.spd.tiers, v); SPD_ALL = false; redrawSpeed(renderSpeed); save(); break;
+    case 'spdmod': toggleIn(APP.spd.mods, v); SPD_ALL = false; redrawSpeed(renderSpeed); save(); break;
+    case 'spdtr': APP.spd.tr = !APP.spd.tr; renderSpeed(); save(); if (APP.spd.cmp) scrollToCmp(); else scrollToList(); break;
+    case 'spdcmp': APP.spd.cmp = APP.spd.cmp === v ? '' : v; $('spdCmp').value = APP.spd.cmp; renderSpeedList(); save(); if (APP.spd.cmp) scrollToCmp(); break;
+    case 'spdrow': { // tapping a Speed in the list makes it the compare line without moving the list
+      const row = () => document.querySelector(`.tier[data-v="${v}"]`);
+      APP.spd.cmp = v; $('spdCmp').value = v; keepPlace(renderSpeedList, row); save(); break;
+    }
+    case 'spdclr': APP.spd.cmp = ''; $('spdCmp').value = ''; renderSpeedList(); save(); $('spdCmp').focus(); break;
+    case 'spdall': {
+      const rows = document.querySelectorAll('#spdList .tier'), lastV = rows.length ? rows[rows.length - 1].dataset.v : null;
+      SPD_ALL = true;
+      keepPlace(renderSpeedList, () => ($('cmpLine') && $('cmpLine').getBoundingClientRect().bottom > 0 ? $('cmpLine') : document.querySelector(`.tier[data-v="${lastV}"]`)));
+      break;
+    }
+    case 'nearopen': NEAR[i].open = true; renderNear(i); break;
+    case 'nearclose': NEAR[i].open = false; NEAR[i].more = false; renderNear(i); nearIntoView(i); break;
+    case 'nearmore': NEAR[i].more = !NEAR[i].more; renderNear(i); if (!NEAR[i].more) nearIntoView(i); break;
+    case 'gospeed': goSpeed(i); break;
   }
 });
 document.addEventListener('input', e => {
   const el = e.target;
   if (el.id === 'sheetSearch') { drawSheet(); return; }
-  if (el.dataset.act === 'sp') { const i = +el.dataset.i; setSP(i, el.dataset.k, +el.value); refreshStats(i); }
+  if (el.id === 'spdQ') {
+    APP.spd.q = el.value; SPD_ALL = false; renderSpeedList(); save();
+    clearTimeout(spdTimer); spdTimer = setTimeout(() => (APP.spd.cmp ? scrollToCmp() : scrollToList()), 350);
+    return;
+  }
+  if (el.id === 'spdCmp') {
+    const v = el.value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 4);
+    if (v !== el.value) el.value = v;
+    APP.spd.cmp = v; renderSpeedList(); save();
+    // jump once the user pauses typing (jumping on every digit would throw the list around)
+    clearTimeout(spdTimer); if (v) spdTimer = setTimeout(() => scrollToCmp(), 350);
+    return;
+  }
+  if (el.dataset.act === 'sp') {
+    const i = +el.dataset.i;
+    if (el.dataset.k === 'spe') NEAR[i].open = true;
+    setSP(i, el.dataset.k, +el.value); refreshStats(i);
+  }
   if (el.dataset.act === 'hp') {
     const i = +el.dataset.i; S.sides[i].hp = +el.value;
     el.style.setProperty('--p', el.value + '%');
@@ -1210,9 +1768,38 @@ document.addEventListener('change', e => {
 });
 $('sheetClose').addEventListener('click', closeSheet);
 $('scrim').addEventListener('click', closeSheet);
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && sheet) closeSheet(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if (tipFor) hideTip(); else if (sheet) closeSheet(); }
+  if (e.target.id === 'spdCmp') {
+    if (e.key === 'Enter') { e.preventDefault(); clearTimeout(spdTimer); scrollToCmp(); if (lastPtr !== 'mouse') e.target.blur(); }
+    else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); clearTimeout(spdTimer); stepCmp((e.key === 'ArrowUp' ? 1 : -1) * (e.shiftKey ? 10 : 1)); }
+  }
+  if (e.target.id === 'spdQ' && e.key === 'Enter') { e.preventDefault(); if (lastPtr !== 'mouse') e.target.blur(); }
+});
+// explanation bubbles
+document.addEventListener('pointerdown', e => { lastPtr = e.pointerType || 'mouse'; }, true);
+// with a mouse: appear after a short pause (so sweeping across the list does not flash bubbles), move instantly once one is open
+let hoverT = 0;
+document.addEventListener('pointerover', e => {
+  if (e.pointerType !== 'mouse') return;
+  const el = e.target.closest('[data-tip]');
+  if (!el || el === tipFor) return;
+  clearTimeout(hoverT);
+  if (tipFor) showTip(el); else hoverT = setTimeout(() => { if (el.isConnected && el.matches(':hover')) showTip(el); }, 250);
+});
+document.addEventListener('pointerout', e => {
+  if (e.pointerType !== 'mouse') return;
+  const from = e.target.closest('[data-tip]');
+  if (from && !(e.relatedTarget && from.contains(e.relatedTarget))) clearTimeout(hoverT);
+  if (tipFor && !(e.relatedTarget && tipFor.contains(e.relatedTarget)) && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-tip]'))) hideTip();
+});
+document.addEventListener('focusin', e => { const el = e.target.closest && e.target.closest('[data-tip]'); if (el && el === e.target && lastPtr === 'mouse' && e.target.matches(':focus-visible')) showTip(el); });
+document.addEventListener('focusout', e => { if (tipFor && e.target === tipFor && lastPtr === 'mouse') hideTip(); });
+// a real scroll closes the bubble; the few pixels a tap can nudge the page (focus) do not
+window.addEventListener('scroll', () => { if (tipFor && Math.abs(window.scrollY - tipY) > 24) hideTip(); }, {passive: true});
+window.addEventListener('resize', () => { hideTip(); if (APP.view === 'speed') document.documentElement.style.setProperty('--navh', navH() + 'px'); });
 $('swapBtn').addEventListener('click', () => {
-  S.sides.reverse(); S.field.sides.reverse();
+  S.sides.reverse(); S.field.sides.reverse(); NEAR.reverse();
   S.open = {d: -1, s: -1};
   renderAll();
 });
