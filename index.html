@@ -1825,6 +1825,7 @@ window.__champCalc = {get APP() { return APP; }, get S() { return S; }, calcMove
  *   app：gacha-calc | champions-calc | rotor-trails | henry-tavern
  *   lang：zh | ja | en（不写就看 <html lang>）
  *   onOpen / onClose：游戏可以在这里暂停 / 继续
+ *   页面自己也监听 popstate（返回键）的，处理前先看 JimiFeedback.ownsBack()：true 表示这次返回是小窗的，页面别动
  * 写的内容发到 https://feedback.tianchengjin.com/v1/feedback（作者自己的 Cloudflare Worker，转成邮件发给作者）。
  * 打开期间键盘事件不会传给游戏（不会边打字边开飞机）；按返回键 / Esc 关闭。
  * 源码在 E:\tool\feedback-worker\widget\，改这里再拷到各项目。
@@ -1854,9 +1855,12 @@ window.__champCalc = {get APP() { return APP; }, get S() { return S; }, calcMove
     '.jmfb-g{border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:6px 12px;background:none;color:inherit;font:inherit;font-size:13px;cursor:pointer}' +
     '.jmfb-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 10px}.jmfb-r img{width:56px;height:56px;object-fit:cover;border-radius:10px}' +
     '.jmfb-e{color:#ff9b87;font-size:13px;margin:0 0 10px}.jmfb-e button{background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit}' +
-    '.jmfb .h{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}';
+    '.jmfb .h{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}' +
+    // 上面 .jmfb 写了 display:flex，会盖掉 hidden 属性（浏览器自带的 [hidden]{display:none} 优先级更低）：
+    // 不写这一条，关掉以后半透明遮罩还盖在页面上、点哪儿都没反应（2026-11-24 亨利酒馆、Rotor Trails 出过）
+    '.jmfb[hidden],.jmfb [hidden]{display:none!important}';
 
-  var root, opts, L, image, sending = false, pushed = false;
+  var root, opts, L, image, sending = false, pushed = false, backPending = false;
 
   function el(tag, attrs, kids) {
     var e = document.createElement(tag);
@@ -1908,7 +1912,8 @@ window.__champCalc = {get APP() { return APP; }, get S() { return S; }, calcMove
   }
   function stop(e) {
     // 打字时不让游戏收到按键（Esc 关窗口除外）
-    if (e.type === 'keydown' && e.key === 'Escape') {
+    // 输入法正在选字时按 Esc 是取消选字，不是关窗口（中文 / 日文输入时常用）
+    if (e.type === 'keydown' && e.key === 'Escape' && !e.isComposing && e.keyCode !== 229) {
       close();
       e.preventDefault();
     }
@@ -2038,9 +2043,23 @@ window.__champCalc = {get APP() { return APP; }, get S() { return S; }, calcMove
     window.removeEventListener('popstate', onPop);
     if (pushed && fromBack !== true) {
       pushed = false;
+      // 自己退掉打开时垫的那一格。这次 popstate 是小窗的：页面自己的返回处理（例如 Rotor Trails）用 ownsBack() 认出来跳过。
+      // 页面的监听比这个先注册、先执行，所以它看到的 backPending 还是 true
+      backPending = true;
+      var done = function () {
+        backPending = false;
+        window.removeEventListener('popstate', done);
+      };
+      window.addEventListener('popstate', done);
+      setTimeout(done, 1500);
       history.back();
     }
     if (opts && opts.onClose) opts.onClose();
+  }
+
+  /** 页面自己也处理 popstate（返回键）时调用：小窗开着、或小窗刚退掉自己垫的那一格，这次「返回」归小窗，页面别再处理 */
+  function ownsBack() {
+    return backPending || !!(root && !root.hidden && pushed);
   }
 
   function open(o) {
@@ -2072,7 +2091,7 @@ window.__champCalc = {get APP() { return APP; }, get S() { return S; }, calcMove
     if (opts.onOpen) opts.onOpen();
   }
 
-  window.JimiFeedback = { open: open, close: close };
+  window.JimiFeedback = { open: open, close: close, ownsBack: ownsBack };
 })();
 
 document.addEventListener('click', (e) => {
